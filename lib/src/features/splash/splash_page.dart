@@ -1,4 +1,5 @@
 import 'package:asyncstate/asyncstate.dart';
+import 'package:dw_barbershop/src/features/auth/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class _SplashPageState extends State<SplashPage> {
   var _animationOpacityLogo = 0.0;
 
   double get _logoAnimationWidth => 100 * _scale;
-  double get _logoAnimationHeight=> 120 * _scale;
+  double get _logoAnimationHeight => 120 * _scale;
 
   @override
   void initState() {
@@ -44,12 +45,34 @@ class _SplashPageState extends State<SplashPage> {
             curve: Curves.easeIn,
             opacity: _animationOpacityLogo,
             duration: const Duration(seconds: 4),
+            onEnd: () {
+              Navigator.of(context).pushAndRemoveUntil(
+                PageRouteBuilder(
+                  settings: RouteSettings(name: '/auth/login'),
+                  pageBuilder: (
+                    context,
+                    animation,
+                    secondaryAnimation,
+                  ) {
+                    return LoginPage();
+                  },
+                  transitionsBuilder: (_, animation, __, child) {
+                    return FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    );
+                  },
+                ),
+                (route) => false
+              );
+            },
             child: AnimatedContainer(
               duration: const Duration(seconds: 3),
               width: _logoAnimationWidth,
               height: _logoAnimationHeight,
               curve: Curves.linearToEaseOut,
-              child: Image.asset('assets/images/imgLogo.png', fit: BoxFit.cover),
+              child:
+                  Image.asset('assets/images/imgLogo.png', fit: BoxFit.cover),
             ),
           ),
         ),
