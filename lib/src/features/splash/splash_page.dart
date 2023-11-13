@@ -1,4 +1,5 @@
 import 'package:asyncstate/asyncstate.dart';
+import 'package:dw_barbershop/src/core/ui/constantes.dart';
 import 'package:dw_barbershop/src/features/auth/login/login_page.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +36,7 @@ class _SplashPageState extends State<SplashPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(
-                'assets/images/background_image_chair.jpg',
+                ImageConstants.backgroundChair,
               ),
               opacity: 0.2,
               fit: BoxFit.cover),
@@ -47,24 +48,23 @@ class _SplashPageState extends State<SplashPage> {
             duration: const Duration(seconds: 4),
             onEnd: () {
               Navigator.of(context).pushAndRemoveUntil(
-                PageRouteBuilder(
-                  settings: RouteSettings(name: '/auth/login'),
-                  pageBuilder: (
-                    context,
-                    animation,
-                    secondaryAnimation,
-                  ) {
-                    return LoginPage();
-                  },
-                  transitionsBuilder: (_, animation, __, child) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                ),
-                (route) => false
-              );
+                  PageRouteBuilder(
+                    settings: RouteSettings(name: '/auth/login'),
+                    pageBuilder: (
+                      context,
+                      animation,
+                      secondaryAnimation,
+                    ) {
+                      return LoginPage();
+                    },
+                    transitionsBuilder: (_, animation, __, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                  (route) => false);
             },
             child: AnimatedContainer(
               duration: const Duration(seconds: 3),

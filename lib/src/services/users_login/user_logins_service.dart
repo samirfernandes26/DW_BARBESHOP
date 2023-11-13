@@ -1,7 +1,7 @@
-import 'package:dw_barbershop/src/core/exeptions/sevice_exception.dart';
+import 'package:dw_barbershop/src/core/exeptions/service_exception.dart';
 import 'package:dw_barbershop/src/core/fp/either.dart';
 import 'package:dw_barbershop/src/core/fp/nil.dart';
 
 abstract interface class UserLoginsService {
-  Future<Either<SeviceException,Nil>> execute(String email, String password);
+  Future<Either<ServiceException,Nil>> execute(String email, String password);
 }

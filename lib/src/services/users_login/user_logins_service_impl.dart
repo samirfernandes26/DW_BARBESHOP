@@ -1,6 +1,6 @@
 import 'package:dw_barbershop/src/core/constants/local_storage_keys.dart';
 import 'package:dw_barbershop/src/core/exeptions/auth_exeption.dart';
-import 'package:dw_barbershop/src/core/exeptions/sevice_exception.dart';
+import 'package:dw_barbershop/src/core/exeptions/service_exception.dart';
 import 'package:dw_barbershop/src/core/fp/either.dart';
 import 'package:dw_barbershop/src/core/fp/nil.dart';
 import 'package:dw_barbershop/src/repositories/user/user_repository.dart';
@@ -15,7 +15,7 @@ class UserLoginsServiceImpl implements UserLoginsService {
   });
 
   @override
-  Future<Either<SeviceException, Nil>> execute(
+  Future<Either<ServiceException, Nil>> execute(
       String email, String password) async {
     final loginResult = await userRepository.login(email, password);
 
@@ -28,12 +28,12 @@ class UserLoginsServiceImpl implements UserLoginsService {
       case Failure(:final exception):
         return switch (exception) {
           AuthError() => Failure(
-              SeviceException(
+              ServiceException(
                 message: 'Erro ao realizar o login',
               ),
             ),
           AuthUnauthorizedException() => Failure(
-              SeviceException(
+              ServiceException(
                 message: 'login ou senha inválidos',
               ),
             )
