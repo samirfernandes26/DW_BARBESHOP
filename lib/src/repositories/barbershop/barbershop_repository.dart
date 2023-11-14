@@ -5,6 +5,6 @@ import 'package:dw_barbershop/src/repositories/user/repository_exception.dart';
 
 abstract interface class BarbershopRepository {
   Future<Either<RepositoryException,BarbershopModel>> getMyBarbershop(
-    UserModel
+    UserModel userModel
   );
 }
